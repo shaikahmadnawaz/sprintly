@@ -16,6 +16,7 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -101,6 +102,17 @@ export const SignInCard = () => {
           <FcGoogle className="mr-2 size-5" />
           Login with Google
         </Button>
+      </CardContent>
+      <div className="px-7">
+        <Separator />
+      </div>
+      <CardContent className="p-7 flex items-center justify-center">
+        <p>
+          Dont&apos;t have an account?{" "}
+          <Link href={"/sign-up"}>
+            <span className="text-primary">Sign Up</span>
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );

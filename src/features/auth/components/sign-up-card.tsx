@@ -112,7 +112,7 @@ export const SignUpCard = () => {
             />
 
             <Button disabled={false} size={"lg"} className="w-full">
-              Login
+              Register
             </Button>
           </form>
         </Form>
@@ -130,6 +130,17 @@ export const SignUpCard = () => {
           <FcGoogle className="mr-2 size-5" />
           Login with Google
         </Button>
+      </CardContent>
+      <div className="px-7">
+        <Separator />
+      </div>
+      <CardContent className="p-7 flex items-center justify-center">
+        <p>
+          Already have an account?{" "}
+          <Link href={"/sign-in"}>
+            <span className="text-primary">Sign In</span>
+          </Link>
+        </p>
       </CardContent>
     </Card>
   );
