@@ -19,9 +19,9 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
           <Image src="/logo.svg" alt="logo" width={150} height={100} />
           <div className="flex items-center gap-2">
             <Button
-              className="bg-white"
-              variant="secondary"
-              onClick={() => {
+              className={"bg-te"}
+              intent="primary"
+              onPress={() => {
                 router.push(pathname === "/sign-in" ? "/sign-up" : "/sign-in");
               }}
             >

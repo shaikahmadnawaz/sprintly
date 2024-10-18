@@ -4,25 +4,14 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { Form } from "@/components/ui/form";
+
 import { Separator } from "@/components/ui/separator";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
+import { TextField } from "@/components/ui/text-field";
 
 const formSchema = z.object({
   name: z.string().trim().min(2, "Name must contain at least 2 character(s)"),
@@ -48,100 +37,87 @@ export const SignUpCard = () => {
   };
   return (
     <Card className="w-full items-center h-full md:w-[486px] border-none shadow-none">
-      <CardHeader className="flex items-center justify-center text-center p-7">
-        <CardTitle className="text-2xl">Sign Up</CardTitle>
-        <CardDescription>
+      <Card.Header className="flex items-center justify-center text-center p-7">
+        <Card.Title className="text-2xl">Sign Up</Card.Title>
+        <Card.Description>
           By signing up, you agree to our{" "}
           <Link href={"/terms"}>
             <span className="text-primary">Terms of Service</span>
           </Link>
-        </CardDescription>
-      </CardHeader>
+        </Card.Description>
+      </Card.Header>
       <div className="px-7">
         <Separator />
       </div>
-      <CardContent className="p-7">
-        <Form {...form}>
-          {" "}
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <FormField
-              name="name"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="text"
-                      placeholder="Enter your name"
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="email"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="email"
-                      placeholder="Enter email address"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              name="password"
-              control={form.control}
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      {...field}
-                      type="password"
-                      placeholder="Enter password"
-                    />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
+      <Card.Content className="p-7">
+        <Form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <Controller
+            name="name"
+            control={form.control}
+            render={({ field }) => (
+              <>
+                {" "}
+                <TextField
+                  {...field}
+                  type="text"
+                  placeholder="Enter your name"
+                  aria-label="Name"
+                />
+              </>
+            )}
+          />
 
-            <Button disabled={false} size={"lg"} className="w-full">
-              Register
-            </Button>
-          </form>
+          <Controller
+            name="email"
+            control={form.control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="email"
+                placeholder="Enter email address"
+                aria-label="Email"
+              />
+            )}
+          />
+
+          <Controller
+            name="password"
+            control={form.control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="password"
+                placeholder="Enter password"
+                aria-label="Password"
+              />
+            )}
+          />
+
+          <Button type="submit" className="w-full">
+            Register
+          </Button>
         </Form>
-      </CardContent>
+      </Card.Content>
       <div className="px-7">
         <Separator />
       </div>
-      <CardContent className="p-7">
-        <Button
-          variant={"secondary"}
-          disabled={false}
-          size={"lg"}
-          className="w-full"
-        >
+      <Card.Content className="p-7">
+        <Button intent={"secondary"} className="w-full">
           <FcGoogle className="mr-2 size-5" />
           Login with Google
         </Button>
-      </CardContent>
+      </Card.Content>
       <div className="px-7">
         <Separator />
       </div>
-      <CardContent className="p-7 flex items-center justify-center">
+      <Card.Content className="p-7 flex items-center justify-center">
         <p>
           Already have an account?{" "}
           <Link href={"/sign-in"}>
             <span className="text-primary">Sign In</span>
           </Link>
         </p>
-      </CardContent>
+      </Card.Content>
     </Card>
   );
 };
