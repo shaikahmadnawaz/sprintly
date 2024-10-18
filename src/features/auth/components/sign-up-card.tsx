@@ -2,6 +2,9 @@
 
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -20,13 +23,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
 
 const formSchema = z.object({
   name: z.string().trim().min(2, "Name must contain at least 2 character(s)"),
-  email: z.string().email(),
+  email: z.string().email("Please enter a valid email address"),
   password: z
     .string()
     .min(6, "Password must contain at least 6 character(s)")

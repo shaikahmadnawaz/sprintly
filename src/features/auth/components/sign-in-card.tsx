@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -16,10 +17,9 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import Link from "next/link";
 
 const formSchema = z.object({
-  email: z.string().email(),
+  email: z.string().email("Please enter a valid email address"),
   password: z
     .string()
     .min(6, "Password must contain at least 6 character(s)")
@@ -83,7 +83,12 @@ export const SignInCard = () => {
               )}
             />
 
-            <Button disabled={false} size={"lg"} className="w-full">
+            <Button
+              disabled={false}
+              type="submit"
+              size={"lg"}
+              className="w-full"
+            >
               Login
             </Button>
           </form>
