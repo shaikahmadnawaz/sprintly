@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
 
 import "./globals.css";
+import { QueryProvider } from "@/components/query-provider";
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
@@ -21,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${dmSans.className} antialiased min-h-screen`}>
-        {children}
+        <QueryProvider> {children}</QueryProvider>
       </body>
     </html>
   );
