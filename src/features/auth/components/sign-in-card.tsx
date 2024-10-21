@@ -1,10 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,24 +18,18 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-const formSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
-  password: z
-    .string()
-    .min(6, "Password must contain at least 6 character(s)")
-    .max(256, "Password must contain at most 256 character(s)"),
-});
+import { signInSchema } from "../schemas";
 
 export const SignInCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof signInSchema>>({
+    resolver: zodResolver(signInSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const onSubmit = (data: z.infer<typeof signInSchema>) => {
     console.log(data);
   };
   return (

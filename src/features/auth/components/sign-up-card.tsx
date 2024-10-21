@@ -24,18 +24,11 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 
-const formSchema = z.object({
-  name: z.string().trim().min(2, "Name must contain at least 2 character(s)"),
-  email: z.string().email("Please enter a valid email address"),
-  password: z
-    .string()
-    .min(6, "Password must contain at least 6 character(s)")
-    .max(256, "Password must contain at most 256 character(s)"),
-});
+import { signUpSchema } from "../schemas";
 
 export const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof signUpSchema>>({
+    resolver: zodResolver(signUpSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -43,7 +36,7 @@ export const SignUpCard = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof formSchema>) => {
+  const onSubmit = (data: z.infer<typeof signUpSchema>) => {
     console.log(data);
   };
   return (
